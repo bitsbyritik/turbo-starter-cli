@@ -6,13 +6,14 @@ import { Command } from "commander";
 import inquirer from "inquirer";
 import chalk from "chalk";
 import { fileURLToPath } from "url";
+import fetch from "npm-registry-fetch";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const program = new Command();
 
-type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
+type PackageManager = "npm" | "pnpm" | "yarn";
 
 program
   .name("create-100x-turbo")
@@ -37,7 +38,24 @@ program
         type: "list",
         name: "packageManager",
         message: "Which package manager do you want to use?",
-        choices: ["npm", "pnpm", "yarn", "bun"],
+        choices: [
+          {
+            name: "npm (disabled)",
+            value: "npm",
+            disabled: "You cannot select npm, pnpm is preferred",
+          },
+          {
+            name: "pnpm (preferred)",
+            value: "pnpm",
+            disabled: false, // This makes it selectable
+          },
+          {
+            name: "yarn (disabled)",
+            value: "yarn",
+            disabled: "You cannot select yarn, pnpm is preferred",
+          },
+        ],
+        default: "pnpm",
       },
     ]);
 
