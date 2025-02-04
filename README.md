@@ -1,4 +1,4 @@
-# Create 100x Turbo Starter
+# Turbo Starter
 
 A CLI tool to quickly set up a Turborepo with a predefined structure including Next.js, Express, and WebSocket server.
 
